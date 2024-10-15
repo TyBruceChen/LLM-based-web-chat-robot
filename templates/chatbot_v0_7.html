@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web ChatBot by Llama3.2-1B</title>
+    </head>    
+    
+    <body>
+	<h1>Web ChatBot by llama3.2-1B</h1>
+	<p>Just for development test, continuous conversation is currently available! Set token length:8192 </p>
+	<p>If error occurs, try access <a href="/session_out">/session_out</a>.</p><hr><br>
+	<form action="" method="POST">
+            The Bot's role (指定AI扮演的角色) (by specifying this, the conversation will be professional and accurate): <input type="text" name="bot_role" value="You are a friendly chatbot who always responds in the style of a research assistant in AI Lab" style="width: 50%; height: 15;">
+	    <br><br>
+	    <p style='color: blue;'>Your question: </p><input type="text" name="question" style='height: 20%; width: 30%;'> 
+	    <br><br>
+            <input type="submit">
+        </form>
+        {% if answer %} 
+		replaced_part_
+        {% endif %}
+	<br>
+	<form action="" method="POST">
+		<input type="submit" name="ClearChat" value="Clear History Chat">
+	</form>
+	<footer>
+		<h5 style="position: fixed; right: 10px; bottom: 90%;">Deployed through USTC's RTX 3080 (10GB), by <a href='https://github.com/TyBruceChen'>TyBruce</a><br>Contact: <a href="mailto:ty_bruce.chen@outlook.com">ty_bruce.chen@outlook.com</a></h5>
+	</footer>
+    </body>
+</html>
