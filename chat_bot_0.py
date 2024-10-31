@@ -33,7 +33,7 @@ def chat_bot(tokenizer, model, question, chatbot_role=None, session_chat = None,
     else:
         chat = chat_template_generate(question, chatbot_role)
 
-    print(f'Input: {chat}\n')  
+    #print(f'Input: {chat}\n')  
 
     time_start = time.time()
     input_ids = tokenizer(chat, 
@@ -48,7 +48,7 @@ def chat_bot(tokenizer, model, question, chatbot_role=None, session_chat = None,
                                 temperature = 0.9,
                                 max_length = max_length)
 
-    print(f'Time used for inference:{time.time()-time_start}')
+    print(f'Time used for token generation:{time.time()-time_start}')
     #print(output_tensors.size())
    
     output_tensors = output_tensors[0][pre_chat_len:].unsqueeze(dim=0)
