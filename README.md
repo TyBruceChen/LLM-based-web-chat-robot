@@ -13,7 +13,7 @@ A server-side deployed agent that provides web chat robot service for users. The
 * **Special Tokens**: In large language model training, some special words are added to the dataset to guide through training. To use its fine-tuned model, we need to follow their special token format to get better performance. See Llama3.2's special token definition: https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/text_prompt_format.md. In this case, I remove the ```eos_token``` for the previous conversations.
 
 ## Requirments:
-**Python packages:** ```transformers, torch, Flask, ffmpeg-python, textile, soundfile``` <br>
+**Python packages:** ```transformers>=4.44.2, torch>=2.5.0, torchaudio>=2.5.0, torchvision>=2.5.0, Flask, ffmpeg-python, textile, soundfile， Flask-Session``` <br>
 **Suggested Machine:** In the author's deployment, ```torch.bfloat16``` precision model is loaded at a ```RTX 3080``` GPU with around ```2 GB``` VRAM utilization for inference (average time: ```4~5 s```). Thus a Nvidia GPU with at least 2GB VRAM is suggested. <br>
 **Model Download:** In this project, I used [unsloth](https://huggingface.co/unsloth/Llama-3.2-1B-Instruct)'s fine-tuned Llama3.2-1B model from huggingface. Other fine-tuned Llama3.2 are also feasible in theory but not tested. <br>
 **(Optional) service exposure**: frp is configured to forward local service to public use.
