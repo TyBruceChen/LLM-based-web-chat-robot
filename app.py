@@ -12,11 +12,12 @@ from file_handler import convert_to_wav
 
 from flask_session import Session #to extend the ssession capacity
 
-main_html = '/chatbot_v1.html'
+main_html = '/improved-chatbot-interface.html'
+main_html_lang_cn = '/improved-chatbot-interface_cn.html'
 whisper_id = '../whisper-base-openai'
-model_id = "../llama3_2_1B-unsloth"
-cert_pub_key = 'https_cert_Aliyun_fullchain/fullchain.pem'
-private_key = 'https_cert_Aliyun_fullchain/www.ty-bruce-server.site.key'
+model_id = "../unsloth-Llama-3.2-3B-Instruct" #"../llama3_2_1B-unsloth"
+cert_pub_key = 'https_ssl/server.crt'
+private_key = 'https_ssl/www.ty-bruce-server.site.key'
 https_enable = True #by enable this, audio function can work for public access
 
 tokenizer, model = model_loading(model_id)
@@ -30,10 +31,18 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 @app.route(main_html, methods=['GET','POST'])
+@app.route(main_html_lang_cn, methods=['GET','POST'])
 def main_page_handle():
 
     input = None
     answer = None
+
+    #handle different languge version request:
+    if request.path == '/improved-chatbot-interface.html':
+        return_html = '/improved-chatbot-interface.html'
+    elif request.path == '/improved-chatbot-interface_cn.html':
+        return_html = '/improved-chatbot-interface_cn.html'
+
     if request.method == 'POST':
         #print(request.form)
         #print(session)
@@ -59,7 +68,7 @@ def main_page_handle():
             file.close
             file_path = convert_to_wav(file_path)
             question = whisper_transcribe(file_path, whisper_processor, whisper_model)
-            bot_role = 'Your are a omniscient secretory who always responds to questions from people all over the world.'
+            bot_role = 'Your are a omniscient secretory who always answer questions from people all over the world with their using languages.'
         else:
             question = request.form['question']
             bot_role = request.form['bot_role']
@@ -79,15 +88,15 @@ def main_page_handle():
         session['pre_chat'] = chat
 
         replace_text = textile.textile(chat)
-        update_html = text_modification(render_template(main_html, answer = True), file_type='text')
+        update_html = text_modification(render_template(return_html, answer = True), file_type='text')
         print(f'Processing Time: {time.time() - start_time}')
         return update_html.replace_content(new_element=replace_text, replaced_element='replaced_part_')
     else:
         if 'pre_chat' in session.keys():
-            update_html = text_modification(render_template(main_html, answer = 1), file_type='text')
+            update_html = text_modification(render_template(return_html, answer = 1), file_type='text')
             return update_html.replace_content(new_element = textile.textile(session['pre_chat']), replaced_element = 'replaced_part_')
         else: 
-            return render_template(main_html)
+            return render_template(return_html)
 
 @app.route('/session_out')
 def session_out():
