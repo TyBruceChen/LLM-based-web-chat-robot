@@ -51,7 +51,7 @@ def main_page_handle():
             session.clear()
             session['pre_chat'] = ''
             session['chat_memo'] = ''
-            return render_template(main_html)
+            return render_template(return_html)
  
         if 'chat_memo' in str(session.keys()):
             session_chat = session['chat_memo']
