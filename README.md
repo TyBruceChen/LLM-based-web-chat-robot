@@ -1,7 +1,7 @@
 # LLM-based-web-chat-robot
 
 ## Introduction:
-A server-side deployed agent that provides web chat robot service for users. The current utilized LLM model(s) is Llama3.2 ([Meta](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/)). [Flask](https://flask.palletsprojects.com/en/3.0.x/quickstart/) realizes web service. <br>
+A server-side deployed agent that provides web chat robot service for users. The current utilized LLM model(s) is Llama3.2 ([Meta](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/)). [Flask](https://flask.palletsprojects.com/en/3.0.x/quickstart/) realizes web service. OpenAI's Whisper model supports the audio input.<br><br>
 **New Feature Updates:** UI improved. \
 ![image](https://github.com/user-attachments/assets/af3484a5-6fb5-4ce0-8e65-50e7c469019a)
 
